@@ -70,7 +70,7 @@ public class MiniTwitterController {
 			getIMiniTwitterService().unfollowUser(userVO);
 			JSONObject jsonObject = new JSONObject();
 			
-			jsonObject.put("Success Message","Successfully Updated,"+userVO.getUser()+" unfollows "+userVO.getUnfollowUser() );
+			jsonObject.put("Success Message","Successfully Updated,"+userVO.getUser()+" unfollowed "+userVO.getUnfollowUser() );
 
 			responseEntity = new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
 		}catch(MiniTwitterException ex)
