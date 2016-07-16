@@ -72,6 +72,10 @@ public class MiniTwitterAuthenticationFilter implements Filter{
 		    }
 		
 	    }
+	    else
+	    {
+	    	httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	    }
 	   
 	}
 
