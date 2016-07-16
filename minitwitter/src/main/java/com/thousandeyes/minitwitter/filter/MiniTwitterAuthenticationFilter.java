@@ -1,8 +1,6 @@
 package com.thousandeyes.minitwitter.filter;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -49,8 +49,8 @@ public class MiniTwitterAuthenticationFilter implements Filter{
 		String authorization = httpRequest.getHeader("Authorization");
 	    if (authorization != null && authorization.startsWith("Basic")) {
 	        String base64Credentials = authorization.substring("Basic".length()).trim();
-	        String credentials = new String(Base64.getDecoder().decode(base64Credentials),
-	                Charset.forName("UTF-8"));
+	       
+	        String credentials = StringUtils.newStringUtf8(Base64.decodeBase64(base64Credentials));
 	  
 	        String[] values = credentials.split(":",2);
 	        String sql = "SELECT USER_ID,TOKEN FROM USER_ACCOUNT WHERE USER_ID = ?";
